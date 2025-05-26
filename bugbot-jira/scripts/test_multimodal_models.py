@@ -13,9 +13,7 @@ import asyncio
 
 # ─── TEST-ONLY API-KEY OVERRIDES ─────────────────────────────────────────────
 # Replace the strings below with your real keys:
-os.environ["OPENAI_API_KEY"]    = "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"
-os.environ["ANTHROPIC_KEY"]     = "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"
-os.environ["GOOGLE_API_KEY"]     = "AIzaSyAbEw83m1Px-E_vL0lYG9T1Y6UkFBFJetY"
+os.environ["OPENAI_API_KEY"]    = 
 # ─────────────────────────────────────────────────────────────────────────────
 
 from dotenv import load_dotenv

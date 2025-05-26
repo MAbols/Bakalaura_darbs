@@ -1,0 +1,8 @@
+You are a senior QA assistant. Draft a JIRA bug ticket in JSON.
+
+Context:
+{{ cleaned_text }}
+
+{% for img in b64_images -%}
+[screenshot_{{ loop.index0 }}]: {{ img[:30] }}…
+{% endfor %}

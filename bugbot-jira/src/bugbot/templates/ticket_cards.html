@@ -1,0 +1,58 @@
+<div class="cards">
+  {% for t in tickets %}
+    <div class="card">
+      <h3>{{ t.vendor }}</h3>
+      <form
+        hx-post="/push"
+        hx-target="closest div"
+        hx-swap="outerHTML"
+        method="post"
+      >
+        <label>Title:
+          <input name="title" value="{{ t.draft.title }}">
+        </label><br>
+
+        <label>Steps:<br>
+          <textarea name="steps">{{ '\n'.join(t.draft.steps) }}</textarea>
+        </label><br>
+
+        <label>Expected:<br>
+          <textarea name="expected">{{ t.draft.expected }}</textarea>
+        </label><br>
+
+        <label>Actual:<br>
+          <textarea name="actual">{{ t.draft.actual }}</textarea>
+        </label><br>
+
+        <label>Severity:
+          <select name="severity">
+            {% for s in ["critical","major","minor"] %}
+              <option value="{{ s }}" {% if s == t.draft.severity %}selected{% endif %}>
+                {{ s }}
+              </option>
+            {% endfor %}
+          </select>
+        </label><br><br>
+
+        <!-- ─── Attachment notice ─────────────────────────────── -->
+        <div class="attachments">
+          <strong>Attachments:</strong><br>
+          <em>All files below will be sent to JIRA when you click “Send”.</em>
+          <ul>
+            {% for fn in t.draft.attachments %}
+              <li>{{ fn }}</li>
+              <!-- hidden input per attachment -->
+              <input type="hidden" name="attachments" value="{{ fn }}">
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Hidden fields to send vendor + full JSON draft -->
+        <input type="hidden" name="vendor" value="{{ t.vendor }}">
+        <input type="hidden" name="draft"  value='{{ t.draft | tojson }}'>
+
+        <button>Send to JIRA</button>
+      </form>
+    </div>
+  {% endfor %}
+</div>

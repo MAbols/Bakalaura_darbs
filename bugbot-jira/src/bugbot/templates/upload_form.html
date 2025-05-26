@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="form-center">
+  <form
+    hx-post="/drafts"
+    hx-target="#drafts"
+    hx-swap="innerHTML"
+    enctype="multipart/form-data">
+    <label>Tester note:<br>
+      <textarea name="note" required></textarea>
+    </label><br><br>
+
+    <label>Screenshot / video:
+      <input type="file" name="files" accept="image/*,video/*" multiple>
+    </label><br><br>
+
+    <button>Generate drafts</button>
+  </form>
+</div> 
+<div id="drafts"></div>
+{% endblock %}
